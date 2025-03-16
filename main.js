@@ -44,10 +44,22 @@ const drawMessagesContainer = async () => {
     const div = document.createElement('div');
     const h1 = document.createElement('h1');
 
+    //div.style.height = "200px";
+
     h1.append('Messages');
     h1.style.textAlign = 'center';
 
     const ul = document.createElement('ul');
+
+    // estilos pantalla de mensajes
+    ul.style.width = '80%';
+    ul.style.height = '60vh';
+    ul.style.overflowY = 'auto'; //scroll 
+    ul.style.border = '5px solid black';
+    ul.style.borderRadius = '10px';
+    ul.style.padding = '10px';
+    ul.style.margin = 'auto';
+    ul.style.display = 'block';
 
     await drawMessages(ul); // Llenar la lista inicialmente
 
