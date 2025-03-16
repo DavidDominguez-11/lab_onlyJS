@@ -48,9 +48,31 @@ const drawMessages = async () => {
     document.body.append(div)
 }
 
+const drawInput = async () => {
+    const divify = document.createElement('div')
+    const textarea = document.createElement('textarea')
+
+    const button = document.createElement('button')
+    button.append('SEND MESSAGE')
+    button.onclick = () => {
+        const message = {
+            text: textarea.value,
+            user: 'David'
+        }
+        postMessages(message)
+    }
+
+    divify.append(textarea)
+    divify.append(button)
+
+    document.body.append(divify)
+    
+}
+
 const main = async () => {
 
     await drawMessages()
+    await drawInput()
 
 }
 
