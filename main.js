@@ -1,19 +1,26 @@
 const getMessages = async () => {
-    const responce = await fetch('https://chat.calicheoficial.lat/messages')
-    return await responce.json()
+    try {
+        const response = await fetch('https://chat.calicheoficial.lat/messages');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        return [];
+    }
+};
 
-}
 const postMessages = async (message) => {
-    const body = JSON.stringify(message)
-    const responce = await fetch(
-        'https://chat.calicheoficial.lat/messages', 
-        {
+    try {
+        const response = await fetch('https://chat.calicheoficial.lat/messages', {
             method: 'POST',
-            body
-        }
-    )
-    return await responce.json()
-}
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(message)
+        });
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error sending message:', error);
+    }
+};
 
 const drawMessages = async () => {
     const div = document.createElement('div')
