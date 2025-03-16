@@ -15,7 +15,42 @@ const postMessages = async (message) => {
     return await responce.json()
 }
 
+const drawMessages = async () => {
+    const div = document.createElement('div')
+    const h1 = document.createElement('h1')
+
+    h1.append('Messages')
+    h1.style.textAlign = 'center'
+
+    const ul = document.createElement('ul')
+    const messages = await getMessages()
+
+    messages.forEach((message) => {
+        const li = document.createElement('li')
+
+        const user = document.createElement('span')
+        user.append(`${message.user}: `)
+
+        const text = document.createElement('span')
+        text.append(message.text)
+
+        li.append(user)
+        li.append(text)
+        
+        ul.append(li)
+
+    })
+
+    div.append(h1)
+    div.append(ul)
+
+
+    document.body.append(div)
+}
+
 const main = async () => {
+
+    await drawMessages()
 
 }
 
