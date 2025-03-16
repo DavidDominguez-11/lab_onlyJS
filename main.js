@@ -24,6 +24,10 @@ const drawMessages = async (ul) => {
     ul.innerHTML = ''; // Limpiar la lista antes de actualizar
     const messages = await getMessages();
 
+    // Guardar la posición actual del scroll antes de actualizar
+    const scrollPosition = ul.scrollTop;
+    const isAtBottom = ul.scrollHeight - ul.clientHeight <= scrollPosition + 10;
+
     messages.forEach((message) => {
         const li = document.createElement('li');
 
@@ -37,6 +41,13 @@ const drawMessages = async (ul) => {
         li.append(text);
         
         ul.append(li);
+
+        // Restaurar la posición del scroll
+    if (isAtBottom) {
+        ul.scrollTop = ul.scrollHeight; // Mantiene el scroll abajo si ya estaba abajo
+    } else {
+        ul.scrollTop = scrollPosition; // Mantiene la posición anterior
+    }
     });
 };
 
@@ -127,6 +138,10 @@ const drawInput = async (ul) => {
 const main = async () => {
     const ul = await drawMessagesContainer(); // Guardamos la referencia de la lista
     await drawInput(ul); // Pasamos la referencia para actualizar la misma lista
+
+    // Auto-refresh cada 5 segundos
+    setInterval(() => drawMessages(ul), 5000);
+
 };
 
 main();
