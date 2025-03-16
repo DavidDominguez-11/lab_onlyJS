@@ -20,6 +20,9 @@ const postMessages = async (message) => {
     }
 };
 
+document.body.style.backgroundColor = '#22223B'; //fondo de todo el body
+document.body.style.fontFamily = 'system-ui';
+
 const drawMessages = async (ul) => {
     ul.innerHTML = ''; // Limpiar la lista antes de actualizar
     const messages = await getMessages();
@@ -31,11 +34,34 @@ const drawMessages = async (ul) => {
     messages.forEach((message) => {
         const li = document.createElement('li');
 
+        li.style.backgroundColor = '#9A8C98';
+        li.style.width='70%';
+        li.style.maxWidth='70%';
+        li.style.height='auto';
+        li.style.padding='5px';
+        li.style.margin='5px';
+        li.style.border= '4px solid black';
+        li.style.borderRadius='10px';
+        
         const user = document.createElement('span');
-        user.append(`${message.user}: `);
+        user.style.fontSize='16px';
+        user.style.fontWeight='bold';
+        
+        if (message.user === 'David') {
+            li.style.backgroundColor = '#C9ADA7';
+            li.style.marginLeft = '20%';
 
+        }
+
+        user.append(`${message.user}: `);
+        
         const text = document.createElement('span');
+        text.style.width='100px';
+        text.style.maxWidth='100px';
+        text.style.height = 'auto';
+        text.style.fontSize='15px';
         text.append(message.text);
+
 
         li.append(user);
         li.append(text);
@@ -59,18 +85,30 @@ const drawMessagesContainer = async () => {
 
     h1.append('Messages');
     h1.style.textAlign = 'center';
+    h1.style.fontSize = '30px';
+    h1.style.color = '#F2E9E4';
 
     const ul = document.createElement('ul');
 
     // estilos pantalla de mensajes
+    ul.style.listStyle='none';
     ul.style.width = '80%';
-    ul.style.height = '60vh';
+    ul.style.height = '50vh';
+
     ul.style.overflowY = 'auto'; //scroll 
+    ul.style.overflow = 'auto'; // Permitir desplazamiento
+    ul.style.msOverflowStyle = 'none'; // Para IE/Edge
+    ul.style.scrollbarWidth = 'none'; // Para Firefox
+    // Para WebKit (Chrome, Safari, etc.)
+    ul.style.setProperty('overflow', 'auto');
+    ul.style.setProperty('scrollbar-width', 'none'); 
+
     ul.style.border = '5px solid black';
     ul.style.borderRadius = '10px';
     ul.style.padding = '10px';
     ul.style.margin = 'auto';
     ul.style.display = 'block';
+    ul.style.backgroundColor = '#4A4E69';
 
     await drawMessages(ul); // Llenar la lista inicialmente
 
@@ -95,11 +133,12 @@ const drawInput = async (ul) => {
     // Estilos para el textarea
     textarea.style.resize = 'none';
     textarea.style.width = '80%';
-    textarea.style.height = '100px';
+    textarea.style.height = '80px';
     textarea.style.border = '5px solid black';
     textarea.style.borderRadius = '10px';
     textarea.style.padding = '10px';
     textarea.style.fontSize = '16px';
+    textarea.style.backgroundColor='#F2E9E4';
 
     const button = document.createElement('button');
     button.append('SEND MESSAGE');
@@ -107,7 +146,7 @@ const drawInput = async (ul) => {
     // Estilos para el botn
     button.style.padding = '20px 20px';
     button.style.fontSize = '20px';
-    button.style.backgroundColor = '#707070';
+    button.style.backgroundColor = '#4A4E69';
     button.style.color = 'white';
     button.style.border = '5px solid black';
     button.style.borderRadius = '10px';
@@ -115,8 +154,8 @@ const drawInput = async (ul) => {
     button.style.transition = 'background-color 0.3s';
 
     // Efecto hover
-    button.onmouseover = () => button.style.backgroundColor = '#3f3f3f';
-    button.onmouseout = () => button.style.backgroundColor = '#707070';
+    button.onmouseover = () => button.style.backgroundColor = '#22223B';
+    button.onmouseout = () => button.style.backgroundColor = '#4A4E69';
 
     
     const sendMessage = async () => {
