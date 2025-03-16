@@ -72,10 +72,42 @@ const drawMessagesContainer = async () => {
 
 const drawInput = async (ul) => {
     const divify = document.createElement('div');
+
+    // Estilos para el contenedor
+    divify.style.display = 'flex';
+    divify.style.flexDirection = 'column';
+    divify.style.alignItems = 'center';
+    divify.style.marginTop = '20px';
+    divify.style.gap = '10px'; 
+
     const textarea = document.createElement('textarea');
+    // Estilos para el textarea
+    textarea.style.resize = 'none';
+    textarea.style.width = '80%';
+    textarea.style.height = '100px';
+    textarea.style.border = '5px solid black';
+    textarea.style.borderRadius = '10px';
+    textarea.style.padding = '10px';
+    textarea.style.fontSize = '16px';
 
     const button = document.createElement('button');
     button.append('SEND MESSAGE');
+
+    // Estilos para el botn
+    button.style.padding = '20px 20px';
+    button.style.fontSize = '20px';
+    button.style.backgroundColor = '#707070';
+    button.style.color = 'white';
+    button.style.border = '5px solid black';
+    button.style.borderRadius = '10px';
+    button.style.cursor = 'pointer';
+    button.style.transition = 'background-color 0.3s';
+
+    // Efecto hover
+    button.onmouseover = () => button.style.backgroundColor = '#3f3f3f';
+    button.onmouseout = () => button.style.backgroundColor = '#707070';
+
+    
     button.onclick = async () => {
         const message = {
             text: textarea.value,
