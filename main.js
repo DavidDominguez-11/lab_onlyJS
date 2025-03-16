@@ -119,15 +119,26 @@ const drawInput = async (ul) => {
     button.onmouseout = () => button.style.backgroundColor = '#707070';
 
     
-    button.onclick = async () => {
+    const sendMessage = async () => {
         const message = {
             text: textarea.value,
             user: 'David'
         };
         await postMessages(message);
         textarea.value = ''; // Limpia el textarea
-        drawMessages(ul); // Refresca la lista de mensajes sin duplicarlos
+        await drawMessages(ul); // Refresca los mensajes
     };
+
+    // "Enter" para hacer submit
+    textarea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) { // shift 
+            e.preventDefault(); // Evitar el salto de linea
+            sendMessage();
+        }
+    });
+
+    // enviar con el btn
+    button.onclick = sendMessage;
 
     divify.append(textarea);
     divify.append(button);
