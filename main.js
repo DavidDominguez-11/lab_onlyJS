@@ -120,6 +120,15 @@ const drawInput = async (ul) => {
 
     
     const sendMessage = async () => {
+
+        // msg de menos 140
+        const messageText = textarea.value;
+
+        if (messageText.length > 140) {
+            alert('El mensaje no puede exceder los 140 caracteres.');
+            return;
+        }
+
         const message = {
             text: textarea.value,
             user: 'David'
